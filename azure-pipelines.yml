@@ -1,4 +1,7 @@
 # .NET Desktop
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -16,6 +19,11 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 
 - task: NuGetCommand@2
   inputs:
